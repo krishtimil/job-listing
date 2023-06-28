@@ -10,7 +10,8 @@ const Job = ({ job, changeFilter }) => {
         <div class="flex-shrink-0">
           <img class="w-20 h-20 rounded-full object-contain" src={company_logo} alt="" />
         </div>
-        <div class="flex-1 min-w-0 justify-start">
+        <div class="flex-1 min-w-0">
+          {moment().diff(new Date(posted_on), 'days') < 10 && (<button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-xs px-2 py-1 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">New</button>)}
           <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
             {position}
           </p>
@@ -68,6 +69,7 @@ const JobListings = () => {
     try {
       const response = await fetch('https://storage.googleapis.com/programiz-static/hiring/software/job-listing-page-challenge/data.json');
       const data = await response.json();
+      data.sort((a, b) => new Date(b.posted_on) - new Date(a.posted_on));
       setJobs(data);
     } catch (error) {
       console.log('Error fetching job listings:', error);
