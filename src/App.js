@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <div className="flex items-center justify-center h-screen w-screen">
-        <div className="container">
+        <div className="container px-10 py-6 m-auto">
           <div className="flex items-center justify-center lg:flex ">
               <JobListings />
             </div>
